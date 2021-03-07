@@ -45,6 +45,7 @@
             this.lblBios = new System.Windows.Forms.Label();
             this.lblTemperatura = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtMensaje = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -202,11 +203,20 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "PROPIEDADES";
             // 
+            // txtMensaje
+            // 
+            this.txtMensaje.Location = new System.Drawing.Point(43, 365);
+            this.txtMensaje.Multiline = true;
+            this.txtMensaje.Name = "txtMensaje";
+            this.txtMensaje.Size = new System.Drawing.Size(696, 37);
+            this.txtMensaje.TabIndex = 20;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1322, 348);
+            this.ClientSize = new System.Drawing.Size(1322, 450);
+            this.Controls.Add(this.txtMensaje);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lblTemperatura);
             this.Controls.Add(this.lblBios);
@@ -246,6 +256,7 @@
         private System.Windows.Forms.Label lblBios;
         private System.Windows.Forms.Label lblTemperatura;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtMensaje;
     }
 }
 

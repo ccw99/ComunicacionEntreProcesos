@@ -16,6 +16,7 @@ namespace ServidorPropiedades
         List<string> listapropiedades;
         DateTime date;
         PropiedadesServidor sp;
+        Servidor servidor;
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +28,9 @@ namespace ServidorPropiedades
             bios();
             sistemaOperativo();
             temperatura();
+            servidor = new Servidor();
+            conexion();
+           // Console.ReadKey();
         }
 
 
@@ -117,6 +121,12 @@ namespace ServidorPropiedades
                 // txtDescripcion.Text += item + " - ";
             }
         }
+        public void conexion() {
+            
+            txtMensaje.Text = servidor.conexionSocket();
+        }
+
+        
 
     }
 }
