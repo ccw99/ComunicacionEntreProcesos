@@ -89,6 +89,32 @@ namespace ServidorPropiedades
             }
         }
 
+        public struct DetallesPC {
+
+            public string hora { get; set; }
+            public string fecha { get; set; }
+            public TarjetaMadre tarjeM { get; set; }
+            public List<DiscoDuro> discoD { get; set; }
+            public Procesador process { get; set; }
+            public Bios bi { get; set; }
+
+            public SistemaOperativo so { get; set; }
+
+            public Temperatura temp { get; set; }
+
+            public DetallesPC(string hora, string fecha, TarjetaMadre tarjeM, List<DiscoDuro> discoD, Procesador process, Bios bi, SistemaOperativo so, Temperatura temp)
+            {
+                this.hora = hora;
+                this.fecha = fecha;
+                this.tarjeM = tarjeM;
+                this.discoD = discoD;
+                this.process = process;
+                this.bi = bi;
+                this.so = so;
+                this.temp = temp;
+            }
+        }
+
 
     }
 }

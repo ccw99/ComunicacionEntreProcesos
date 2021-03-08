@@ -46,6 +46,7 @@
             this.lblTemperatura = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtMensaje = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -208,14 +209,25 @@
             this.txtMensaje.Location = new System.Drawing.Point(43, 365);
             this.txtMensaje.Multiline = true;
             this.txtMensaje.Name = "txtMensaje";
-            this.txtMensaje.Size = new System.Drawing.Size(696, 37);
+            this.txtMensaje.Size = new System.Drawing.Size(696, 208);
             this.txtMensaje.TabIndex = 20;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(764, 365);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Json";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1322, 450);
+            this.ClientSize = new System.Drawing.Size(1322, 585);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtMensaje);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lblTemperatura);
@@ -257,6 +269,7 @@
         private System.Windows.Forms.Label lblTemperatura;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtMensaje;
+        private System.Windows.Forms.Button button1;
     }
 }
 

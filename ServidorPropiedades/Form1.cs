@@ -14,13 +14,28 @@ namespace ServidorPropiedades
 {
     public partial class Form1 : Form
     {
-        List<string> listapropiedades;
+        EstructuraPropiedades.Temperatura temp;
+        EstructuraPropiedades.SistemaOperativo so;
+        EstructuraPropiedades.TarjetaMadre tarmadre;
+        EstructuraPropiedades.Procesador process;
+        EstructuraPropiedades.Bios bi;
+        List<EstructuraPropiedades.DiscoDuro> discosD;
         DateTime date;
         PropiedadesServidor sp;
         Servidor servidor;
+        string hora;
+        string fecha;
         public Form1()
         {
             InitializeComponent();
+
+            detallesMetodos();
+            //servidor = new Servidor();
+           // conexion();
+           // Console.ReadKey();
+        }
+        public void detallesMetodos()
+        {
             getDate();
             tarjetaMadre();
             discoDuro();
@@ -29,15 +44,13 @@ namespace ServidorPropiedades
             bios();
             sistemaOperativo();
             temperatura();
-            servidor = new Servidor();
-           // conexion();
-           // Console.ReadKey();
         }
-
 
         public void getDate() {
             date = DateTime.Now;
-            lblFecha.Text = date.ToShortTimeString() + "   " + date.ToLongDateString();
+            hora = date.ToShortTimeString();
+            fecha = date.ToLongDateString();
+            lblFecha.Text = hora  + "   " + fecha;
         
         }
 
@@ -47,7 +60,7 @@ namespace ServidorPropiedades
         }
         public void tarjetaMadre()
         {
-            EstructuraPropiedades.TarjetaMadre tarmadre;
+           
             sp = new PropiedadesServidor();
             tarmadre = sp.tarjetaMadre();
             lblTarjetaMadre.Text = "";
@@ -57,20 +70,20 @@ namespace ServidorPropiedades
         }
         public void discoDuro()
         {
-            //listapropiedades = new List<string>();
-            //sp = new PropiedadesServidor();
-            //listapropiedades = sp.discoDuro();
-            //lblDiscoDuro.Text = "";
-            //foreach (string item in listapropiedades)
-            //{
-                
-            //    lblDiscoDuro.Text += item + " ";
-                
-            //}
+            
+            sp = new PropiedadesServidor();
+            discosD = sp.discoDuro();
+            lblDiscoDuro.Text = "";
+            foreach (EstructuraPropiedades.DiscoDuro item in discosD)
+            {
+
+                //lbldiscoduro.text += item + " ";
+                lblDiscoDuro.Text += item.name +" - "+ item.model + " - " + item.partitions + " - " + item.status;
+            }
         }
         public void procesador()
         {
-            EstructuraPropiedades.Procesador process = new EstructuraPropiedades.Procesador();
+           
             sp = new PropiedadesServidor();
             process = sp.procesador();
             lblProcesador.Text = "";
@@ -83,18 +96,18 @@ namespace ServidorPropiedades
         }
         public void bios()
         {
-            EstructuraPropiedades.Bios bi;
+           
             sp = new PropiedadesServidor();
             bi = sp.bios();
             lblBios.Text = "";
             lblBios.Text = bi.name + " " + bi.version + " ";
-            string json = JsonConvert.SerializeObject(bi, Formatting.Indented);
+            
             // txtDescripcion.Text += item + " - ";
 
         }
         public void sistemaOperativo()
         {
-            EstructuraPropiedades.SistemaOperativo so;
+           
             sp = new PropiedadesServidor();
             so = sp.sistemaOperativo();
             lblSO.Text = "";
@@ -104,7 +117,7 @@ namespace ServidorPropiedades
         }
         public void temperatura()
         {
-            EstructuraPropiedades.Temperatura temp;
+           
             sp = new PropiedadesServidor();
             temp = sp.temperatura();
             lblTemperatura.Text = "";
@@ -117,7 +130,17 @@ namespace ServidorPropiedades
             txtMensaje.Text = servidor.conexionSocket();
         }
 
-        
+        public void enviarMensaje()
+        {
 
+            EstructuraPropiedades.DetallesPC detallePc = new EstructuraPropiedades.DetallesPC(date.ToShortTimeString(), date.ToLongDateString(), tarmadre,discosD,process,bi,so,temp);
+            string json = JsonConvert.SerializeObject(detallePc, Formatting.Indented);
+            txtMensaje.Text = json;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            enviarMensaje();
+        }
     }
 }
