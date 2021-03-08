@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace ServidorPropiedades
 {
@@ -29,7 +30,7 @@ namespace ServidorPropiedades
             sistemaOperativo();
             temperatura();
             servidor = new Servidor();
-            conexion();
+           // conexion();
            // Console.ReadKey();
         }
 
@@ -46,80 +47,70 @@ namespace ServidorPropiedades
         }
         public void tarjetaMadre()
         {
-            listapropiedades = new List<string>();
+            EstructuraPropiedades.TarjetaMadre tarmadre;
             sp = new PropiedadesServidor();
-            listapropiedades = sp.tarjetaMadre();
+            tarmadre = sp.tarjetaMadre();
             lblTarjetaMadre.Text = "";
-            foreach (string item in listapropiedades)
-            {
-                
-                lblTarjetaMadre.Text += item + " ";
-            }
+               
+            lblTarjetaMadre.Text = tarmadre.deviceID + " - " + tarmadre.primaryBus + " - " + tarmadre.status;
+            string json = JsonConvert.SerializeObject(tarmadre, Formatting.Indented);
         }
         public void discoDuro()
         {
-            listapropiedades = new List<string>();
-            sp = new PropiedadesServidor();
-            listapropiedades = sp.discoDuro();
-            lblDiscoDuro.Text = "";
-            foreach (string item in listapropiedades)
-            {
+            //listapropiedades = new List<string>();
+            //sp = new PropiedadesServidor();
+            //listapropiedades = sp.discoDuro();
+            //lblDiscoDuro.Text = "";
+            //foreach (string item in listapropiedades)
+            //{
                 
-                lblDiscoDuro.Text += item + " ";
+            //    lblDiscoDuro.Text += item + " ";
                 
-            }
+            //}
         }
         public void procesador()
         {
-            listapropiedades = new List<string>();
+            EstructuraPropiedades.Procesador process = new EstructuraPropiedades.Procesador();
             sp = new PropiedadesServidor();
-            listapropiedades = sp.procesador();
+            process = sp.procesador();
             lblProcesador.Text = "";
-            foreach (string item in listapropiedades)
-            {
+            
 
-                lblProcesador.Text += item + " ";
-               // txtDescripcion.Text += item + " - ";
-            }
+           lblProcesador.Text = process.name + " " + process.velocity + " " + process.addressWidth + " " +process.status;
+            string json = JsonConvert.SerializeObject(process, Formatting.Indented);
+            // txtDescripcion.Text += item + " - ";
+
         }
         public void bios()
         {
-            listapropiedades = new List<string>();
+            EstructuraPropiedades.Bios bi;
             sp = new PropiedadesServidor();
-            listapropiedades = sp.bios();
+            bi = sp.bios();
             lblBios.Text = "";
-            foreach (string item in listapropiedades)
-            {
+            lblBios.Text = bi.name + " " + bi.version + " ";
+            string json = JsonConvert.SerializeObject(bi, Formatting.Indented);
+            // txtDescripcion.Text += item + " - ";
 
-                lblBios.Text += item + " ";
-                // txtDescripcion.Text += item + " - ";
-            }
         }
         public void sistemaOperativo()
         {
-            listapropiedades = new List<string>();
+            EstructuraPropiedades.SistemaOperativo so;
             sp = new PropiedadesServidor();
-            listapropiedades = sp.sistemaOperativo();
+            so = sp.sistemaOperativo();
             lblSO.Text = "";
-            foreach (string item in listapropiedades)
-            {
-
-                lblSO.Text += item + " ";
+           lblSO.Text = so.name + " " +  so.organization +" " + so.primary;
                 // txtDescripcion.Text += item + " - ";
-            }
+       
         }
         public void temperatura()
         {
-            listapropiedades = new List<string>();
+            EstructuraPropiedades.Temperatura temp;
             sp = new PropiedadesServidor();
-            listapropiedades = sp.temperatura();
+            temp = sp.temperatura();
             lblTemperatura.Text = "";
-            foreach (string item in listapropiedades)
-            {
-
-                lblTemperatura.Text += item + " ";
+            lblTemperatura.Text = temp.status + " " + temp.temperature;
                 // txtDescripcion.Text += item + " - ";
-            }
+       
         }
         public void conexion() {
             

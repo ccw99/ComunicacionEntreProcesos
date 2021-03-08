@@ -10,13 +10,14 @@ namespace ServidorPropiedades
 {
     public class PropiedadesServidor
     {
+        EstructuraPropiedades estpro;
        // ManagementObjectSearcher tarjetaMadre = new ManagementObjectSearcher("SELECT * FROM Win32_MotherboardDevice");
         //ManagementClass wmi = new ManagementClass(" //Class//");
         ManagementClass wmi;
 
         public PropiedadesServidor()
         {
-           
+            estpro = new EstructuraPropiedades();
 
         }
         
@@ -24,100 +25,93 @@ namespace ServidorPropiedades
         
         
         
-        public List<string> tarjetaMadre() {
+        public EstructuraPropiedades.TarjetaMadre tarjetaMadre() {
             wmi = new ManagementClass("Win32_MotherboardDevice");
             var providers = wmi.GetInstances();
-            List<string> propiedades = new List<string>();
+            EstructuraPropiedades.TarjetaMadre tarmadre = new EstructuraPropiedades.TarjetaMadre();
             foreach (var item  in providers)
             {
-                propiedades.Add(item["DeviceID"].ToString());
-                propiedades.Add(item["PrimaryBusType"].ToString());
-                propiedades.Add(item["SecondaryBusType"].ToString());
-                propiedades.Add(item["Status"].ToString());
+                tarmadre = new EstructuraPropiedades.TarjetaMadre(item["DeviceID"].ToString(), item["PrimaryBusType"].ToString(),item["Status"].ToString());
             }
-            return propiedades;
+            return tarmadre;
         }
 
-        public List<string> discoDuro() {
+        public List<EstructuraPropiedades.DiscoDuro> discoDuro() {
             wmi = new ManagementClass("Win32_DiskDrive");
             var providers = wmi.GetInstances();
-            List<string> propiedades = new List<string>();
+            EstructuraPropiedades.DiscoDuro discoD;
+            List<EstructuraPropiedades.DiscoDuro> propiedades = new List<EstructuraPropiedades.DiscoDuro>();
             foreach (var item in providers)
             {
-                propiedades.Add(item["Name"].ToString());
-                propiedades.Add(item["Model"].ToString());
-                propiedades.Add(item["Partitions"].ToString());
-                propiedades.Add(item["Status"].ToString());
-                //propiedades.Add(item["Size"] + "" );
+                discoD = new EstructuraPropiedades.DiscoDuro(item["Name"].ToString(), item["Partitions"].ToString(), item["Status"].ToString(), item["Size"] + "");
+
+                propiedades.Add(discoD);
+
+               // propiedades.Add(item["Name"].ToString());
+               //  propiedades.Add(item["Model"].ToString());
+               //  propiedades.Add(item["Partitions"].ToString());
+               //  propiedades.Add(item["Status"].ToString());
+               //propiedades.Add(item["Size"] + "" );
+
             }
 
 
             return propiedades;
         }
-        public List<string> procesador()
+        public EstructuraPropiedades.Procesador procesador()
         {
             wmi = new ManagementClass("Win32_Processor");
             var providers = wmi.GetInstances();
-            List<string> propiedades = new List<string>();
+            EstructuraPropiedades.Procesador process = new EstructuraPropiedades.Procesador();
             foreach (var item in providers)
             {
-                propiedades.Add(item["Name"].ToString());
-                propiedades.Add(item["AddressWidth"].ToString());
-                propiedades.Add(item["CurrentClockSpeed"].ToString());
-                propiedades.Add(item["Status"].ToString());
-                //propiedades.Add(item["Size"] + "" );
+                process = new EstructuraPropiedades.Procesador(item["Name"].ToString(), item["AddressWidth"].ToString(), item["CurrentClockSpeed"].ToString(), item["Status"].ToString());
             }
 
 
-            return propiedades;
+            return process;
         }
-        public List<string> bios()
+        public EstructuraPropiedades.Bios bios()
         {
             wmi = new ManagementClass("Win32_BIOS");
             var providers = wmi.GetInstances();
-            List<string> propiedades = new List<string>();
+            EstructuraPropiedades.Bios bi = new EstructuraPropiedades.Bios();
             foreach (var item in providers)
             {
-                propiedades.Add(item["Name"].ToString());
-                
-                propiedades.Add(item["Version"].ToString());
+                bi = new EstructuraPropiedades.Bios(item["Name"].ToString(), item["Version"].ToString());
                 //propiedades.Add(item["Size"] + "" );
             }
 
 
-            return propiedades;
+            return bi;
         }
-        public List<string> sistemaOperativo()
+        public EstructuraPropiedades.SistemaOperativo sistemaOperativo()
         {
             wmi = new ManagementClass("Win32_OperatingSystem");
             var providers = wmi.GetInstances();
-            List<string> propiedades = new List<string>();
-            foreach (var item in providers)
-            {
-                propiedades.Add(item["Name"].ToString());
-
-                propiedades.Add(item["Organization"].ToString());
-                propiedades.Add(item["Primary"] + "" );
-            }
-
-
-            return propiedades;
-        }
-        public List<string> temperatura()
-        {
-            wmi = new ManagementClass("Win32_TemperatureProbe");
-            var providers = wmi.GetInstances();
-            List<string> propiedades = new List<string>();
+            EstructuraPropiedades.SistemaOperativo so = new EstructuraPropiedades.SistemaOperativo();
             foreach (var item in providers)
             {
                 
-
-                propiedades.Add(item["Status"].ToString());
-                propiedades.Add(item["CurrentReading"] + "");
+                so = new EstructuraPropiedades.SistemaOperativo(item["Name"].ToString(), item["Organization"].ToString(), item["Primary"] + "");
             }
 
 
-            return propiedades;
+            return so;
+        }
+        public EstructuraPropiedades.Temperatura temperatura()
+        {
+            wmi = new ManagementClass("Win32_TemperatureProbe");
+            var providers = wmi.GetInstances();
+            EstructuraPropiedades.Temperatura temp = new EstructuraPropiedades.Temperatura();
+            foreach (var item in providers)
+            {
+               
+                temp = new EstructuraPropiedades.Temperatura(item["Status"].ToString(), item["CurrentReading"] + "");
+            }
+
+
+            return temp;
         }
 
 

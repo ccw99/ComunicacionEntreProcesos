@@ -21,8 +21,8 @@ namespace ServidorPropiedades
             
         }
 
-
-
+       
+            
         public void escuchando(){
         
         }
