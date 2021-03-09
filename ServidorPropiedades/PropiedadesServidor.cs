@@ -107,7 +107,7 @@ namespace ServidorPropiedades
             foreach (var item in providers)
             {
                
-                temp = new EstructuraPropiedades.Temperatura(item["Status"].ToString(), item["CurrentReading"] + "");
+                temp = new EstructuraPropiedades.Temperatura(item["Status"].ToString(), "");
             }
 
 

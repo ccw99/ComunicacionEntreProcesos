@@ -30,8 +30,8 @@ namespace ServidorPropiedades
             InitializeComponent();
 
             detallesMetodos();
-            //servidor = new Servidor();
-           // conexion();
+            servidor = new Servidor("10.187.249.56", 6400);
+            conexion(enviarMensaje());
            // Console.ReadKey();
         }
         public void detallesMetodos()
@@ -125,22 +125,23 @@ namespace ServidorPropiedades
                 // txtDescripcion.Text += item + " - ";
        
         }
-        public void conexion() {
+        public void conexion(string mensaje) {
             
-            txtMensaje.Text = servidor.conexionSocket();
+            txtMensaje.Text = servidor.conexionSocket(mensaje);
         }
 
-        public void enviarMensaje()
+        public string enviarMensaje()
         {
 
             EstructuraPropiedades.DetallesPC detallePc = new EstructuraPropiedades.DetallesPC(date.ToShortTimeString(), date.ToLongDateString(), tarmadre,discosD,process,bi,so,temp);
             string json = JsonConvert.SerializeObject(detallePc, Formatting.Indented);
             txtMensaje.Text = json;
+            return json;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            enviarMensaje();
+           // enviarMensaje();
         }
     }
 }
